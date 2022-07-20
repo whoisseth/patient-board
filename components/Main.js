@@ -43,7 +43,9 @@ function EventType() {
       <div className="shadow-[0px_15px_30px_rgba(173,206,255,0.13)] bg-white rounded-[10px] h-[74px] w-full max-w-[1359px]  px-8 py-4 justify-between flex items-center">
         <div>
           <h1 className={h1}>Event Type</h1>
-          <p className="text-[#F45B5B]">Atrial Fibrillation >= 30 seconds</p>
+          <p className="text-[#F45B5B]">
+            Atrial Fibrillation {' >= '} 30 seconds
+          </p>
         </div>
         <div>
           <h1 className={h1}>Event ID</h1>
