@@ -1,6 +1,6 @@
-export default function Menu() {
+export default function Menu(props) {
   return (
-    <div>
+    <div {...props}>
       <svg
         width="28"
         height="19"

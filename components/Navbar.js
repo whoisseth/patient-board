@@ -7,6 +7,7 @@ import classnames from 'classnames'
 import { FiMessageSquare } from 'react-icons/fi'
 import { BiBellMinus } from 'react-icons/bi'
 import { IoIosArrowDown } from 'react-icons/io'
+import { useStore } from './../store/store'
 export default function Navbar() {
   return (
     <div className="flex items-center px-9 border-b-[1px] w-full justify-between">
@@ -22,9 +23,10 @@ export default function Navbar() {
 }
 
 function MenuAndLogo() {
+  const { toggleMenu } = useStore()
   return (
     <div className="flex items-center gap-14 py-4 ">
-      <Menu />
+      <Menu onClick={toggleMenu} className="cursor-pointer" />
       <Image src={logo} height={74} width={85} alt="logo" />
     </div>
   )
@@ -42,11 +44,11 @@ function CTAButton({ title, number, className }) {
   return (
     <div
       className={classnames(
-        ' flex items-center gap-2 h-[51px] px-4 rounded-lg ',
+        ' flex items-center gap-2 h-[51px] px-4 rounded-lg  ',
         className,
       )}
     >
-      <span className="font-bold text-white">{title}</span>
+      <span className="font-bold text-white whitespace-nowrap">{title}</span>
       <div className="h-[37px] flex items-center justify-center w-[37px] bg-white font-bold text-xl text-black rounded-full">
         {number}
       </div>
@@ -77,7 +79,7 @@ function Notification() {
 
 function LoginLogout() {
   return (
-    <div className="flex items-center gap-2 ml-7">
+    <div className="flex items-center gap-2 ml-7 h-[107px]">
       <div className="flex flex-col items-end   text-sm font-medium ">
         <p>Armand</p>
         <p>Supervisor</p>
@@ -87,7 +89,7 @@ function LoginLogout() {
         height={48}
         width={48}
         alt="loginAvatar "
-        className='rounded-full cursor-pointer'
+        className="rounded-full "
       />
       <IoIosArrowDown className="text-2xl cursor-pointer" />
     </div>
