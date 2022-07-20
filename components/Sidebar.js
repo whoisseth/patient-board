@@ -4,9 +4,11 @@ import Panel from './svg/Panel'
 import Admin from './svg/Admin'
 import classnames from 'classnames'
 import { useStore } from './../store/store'
+import QuestionMark from './svg/QuestionMark'
+import Headset from './svg/Headset'
 export default function Sidebar() {
   return (
-    <div className="pt-14 bg-white shadow-[0px_12px_24px_rgba(0,0,0,0.05)]  ">
+    <div className="pt-14 bg-white shadow-[0px_12px_24px_rgba(0,0,0,0.05)] relative  ">
       <div className="flex flex-col  gap-4 transition-all ">
         <SidebarLayout text="Dashboard">
           <Dashboard />
@@ -21,6 +23,16 @@ export default function Sidebar() {
           <Admin />
         </SidebarLayout>
       </div>
+
+      {/*  Help and support*/}
+      <div className="flex flex-col absolute bottom-10 ">
+        <SidebarLayout text="Online Help">
+          <QuestionMark />
+        </SidebarLayout>
+        <SidebarLayout text="Contact Support">
+          <Headset />
+        </SidebarLayout>
+      </div>
     </div>
   )
 }
@@ -30,16 +42,15 @@ function SidebarLayout({ children, text, active }) {
   return (
     <div
       className={classnames(
-        ' flex  transition-all cursor-pointer items-center gap-3  px-9 py-2  hover:text-[#76C3FF] border-l-4     hover:fill-blue-400 ',
-        // { 'border-transparent': !menu && !active },
+        ' flex  transition-all cursor-pointer items-center gap-3  px-9 py-2  hover:text-[#76C3FF]     hover:fill-blue-400 ',
         {
-          'fill-blue-400  ': active,
+          'fill-blue-400 ': active,
           'fill-[#616161]   text-[#616161]': !active,
         },
-        { 'hover:border-[#76C3FF] hover:bg-[#DAEFFF]': menu },
         {
-          ' border-[#76C3FF]  text-[#76C3FF] bg-[#DAEFFF] ': menu && active,
+          'hover:border-[#76C3FF] hover:bg-[#DAEFFF] border-transparent   border-l-4 ': menu,
         },
+        { ' !border-[#76C3FF]  text-[#76C3FF] bg-[#DAEFFF]  ': menu && active },
       )}
     >
       {children}
