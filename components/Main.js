@@ -9,17 +9,20 @@ import classnames from 'classnames'
 import { useStore } from './../store/store'
 import player from '../public/images/player.png'
 import Image from 'next/image'
+import Graph from './Graph'
 
 const shadowAndRound = 'shadow-[0px_12px_26px_rgba(16,30,115,0.06)] rounded-lg'
 export default function Main() {
   return (
-    <div className="h-full w-full bg-[#F5F5F5]  px-9 pt-3">
-      <Event />
-      <EventType />
-      <GraphAndTools />
-      <Measurement />
-      <Finding />
-      <Comments />
+    <div className=" h-full w-full bg-[#F5F5F5]  px-9 pt-3 ">
+      <div className="   max-w-[1734px] mx-auto pb-20">
+        <Event />
+        <EventType />
+        <GraphAndTools />
+        <Measurement />
+        <Finding />
+        <Comments />
+      </div>
     </div>
   )
 }
@@ -100,14 +103,43 @@ function EventType() {
   )
 }
 function GraphAndTools() {
+  const data1 = ['25 mm/sec', '2', '3', '4']
+  const data2 = ['10 mm/mV', '2', '3', '4']
+  const data3 = ['Lead All', '2', '3', '4']
+  const style =
+    'text-[#474747] outline-none border w-[160px] h-[38px] rounded-lg '
   return (
-    <div className="flex justify-between h-[443px] mb-3">
+    <div className="flex justify-between h-[443px] mb-3  ">
       <div
         className={classnames(
-          '  bg-white w-full max-w-[1664px]  h-full ',
+          '  bg-white w-full max-w-[1664px]  h-full px-6 py-5 ',
           shadowAndRound,
         )}
-      ></div>
+      >
+        <div className="flex  items-center gap-4 mb-[10px]">
+          <select className={style}>
+            {data1.map((data, index) => (
+              <option key={index}>{data}</option>
+            ))}
+          </select>
+          <select className={style}>
+            {data2.map((data, index) => (
+              <option key={index}>{data}</option>
+            ))}
+          </select>
+          <select className={style}>
+            {data3.map((data, index) => (
+              <option key={index}>{data}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <div className="border-[#777777] border-2 w-full  h-[286px] max-h-full">
+            <Graph />
+          </div>
+          <div className="border-[#777777] border-2 w-full  h-14 mt-[10px]"></div>
+        </div>
+      </div>
 
       <RightSideTools />
     </div>
@@ -151,8 +183,15 @@ function ToolsContainer({ children, ...props }) {
 }
 
 function Measurement() {
+  const { menu } = useStore()
+
   return (
-    <div className="flex  items-center gap-4 justify-between">
+    <div
+      className={classnames('flex  items-center  justify-between', {
+        'gap-6': menu,
+        'gap-4': !menu,
+      })}
+    >
       {/* <div className="flex gap-4 items-center ml-5"> */}
       <div className="text-xl font-bold text[#474747]">Measurement</div>
       <MeasureComp t1="hr" t2="bmp" />
@@ -187,11 +226,18 @@ function MeasureComp({ t1, t2 }) {
 }
 
 function Finding() {
+  const { menu } = useStore()
+
   return (
     <div className="flex gap-[145px] items-center  w-fit mb-4">
       <div className="flex items-center">
         <div className="text-[#474747]">Finding</div>
-        <select className="w-[256px] h-[38px] rounded-lg ml-[118px] border">
+        <select
+          className={classnames('w-[256px] h-[38px] rounded-lg border', {
+            'ml-[98px]': menu,
+            'ml-[116px] ': !menu,
+          })}
+        >
           <option>Select</option>
           <option>1</option>
           <option>2</option>
@@ -213,14 +259,18 @@ function Finding() {
 }
 
 function Comments() {
+  const { menu } = useStore()
   return (
-    <div className="flex justify-between ">
+    <div className="flex justify-between  ">
       <div className="text-xl font-bold text[#474747]">Comments</div>
       <textarea
         type="text"
-        className="ml-16 h-[74px] outline-none rounded-[10px] w-full max-w-[1000px]  border shadow-[0px_15px_30px_rgba(151,151,151,0.1)]"
+        className={classnames(
+          ' h-[74px] outline-none rounded-[10px] w-full max-w-[1000px]  border shadow-[0px_15px_30px_rgba(151,151,151,0.1)]',
+          { 'ml-12': menu, 'ml-6': !menu },
+        )}
       />
-      <div className="flex flex-col gap-4 -mt-5">
+      <div className="flex flex-col gap-4 -mt-5 ml-10">
         <div className="flex justify-between items-center">
           <Image src={player} height={44} width={252} />
           <button className="px-[6px]  bg-black text-white rounded-lg shadow-[0px_20px_40px_rgba(115,187,191,0.1)]  flex  items-center  w-[156px] h-[34px] gap-2">
